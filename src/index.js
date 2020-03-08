@@ -38,8 +38,20 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
-}
+    const space = '**********';
+    const arr = expr.match(/.{1,10}/g);
+    let result = [];
+    for (let symbolDigits of arr) {
+        if (symbolDigits === space) {
+            result.push(' ');
+            continue;
+        }
+        const digitsWithoutZeros = symbolDigits.replace(/0{2,}/, '');
+        result.push(MORSE_TABLE[digitsWithoutZeros.replace(/10/g, '.').replace(/11/g, '-')]);
+    }
+    console.log(result)
+    return result.join('');
+  }
 
 module.exports = {
     decode
